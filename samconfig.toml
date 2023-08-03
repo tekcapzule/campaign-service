@@ -2,9 +2,9 @@ version = 0.1
 [dev]
 [dev.deploy]
 [dev.deploy.parameters]
-stack_name = "dev-course-service"
+stack_name = "dev-marketing-service"
 s3_bucket = "com.tekcapsule.api.deployment.dev"
-s3_prefix = "dev-course-service"
+s3_prefix = "dev-marketing-service"
 region = "us-east-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
@@ -14,9 +14,9 @@ image_repositories = []
 [prod]
 [prod.deploy]
 [prod.deploy.parameters]
-stack_name = "prod-course-service"
+stack_name = "prod-marketing-service"
 s3_bucket = "com.tekcapsule.api.deployment.prod"
-s3_prefix = "prod-course-service"
+s3_prefix = "prod-marketing-service"
 region = "us-east-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
