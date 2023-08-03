@@ -2,9 +2,9 @@ version = 0.1
 [dev]
 [dev.deploy]
 [dev.deploy.parameters]
-stack_name = "dev-marketing-service"
+stack_name = "dev-campaign-service"
 s3_bucket = "com.tekcapsule.api.deployment.dev"
-s3_prefix = "dev-marketing-service"
+s3_prefix = "dev-campaign-service"
 region = "us-east-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
@@ -14,9 +14,9 @@ image_repositories = []
 [prod]
 [prod.deploy]
 [prod.deploy.parameters]
-stack_name = "prod-marketing-service"
+stack_name = "prod-campaign-service"
 s3_bucket = "com.tekcapsule.api.deployment.prod"
-s3_prefix = "prod-marketing-service"
+s3_prefix = "prod-campaign-service"
 region = "us-east-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"

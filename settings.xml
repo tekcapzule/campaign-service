@@ -18,8 +18,8 @@
                     </snapshots>
                 </repository>
                 <repository>
-                    <id>marketing</id>
-                    <url>https://maven.pkg.github.com/tekcapsule/marketing-service</url>
+                    <id>campaign</id>
+                    <url>https://maven.pkg.github.com/tekcapsule/campaign-service</url>
                     <snapshots>
                         <enabled>true</enabled>
                     </snapshots>
@@ -34,7 +34,7 @@
 
     <servers>
         <server>
-            <id>marketing</id>
+            <id>campaign</id>
             <username>${env.SERVER_USERNAME}</username>
             <password>${env.SERVER_PASSWORD}</password>
         </server>

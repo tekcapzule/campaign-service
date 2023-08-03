@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.tekcapsule</groupId>
-    <artifactId>marketing-application</artifactId>
+    <artifactId>campaign-application</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>Marketing Application</name>
-    <description>Marketing Application</description>
+    <name>Campaign Application</name>
+    <description>Campaign Application</description>
     <properties>
         <sonar.organization>tekcapsule</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -29,9 +29,9 @@
     </build>
     <distributionManagement>
         <repository>
-            <id>marketing</id>
+            <id>campaign</id>
             <name>GitHub TekCapsule Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/tekcapsule/marketing-service</url>
+            <url>https://maven.pkg.github.com/tekcapsule/campaign-service</url>
         </repository>
     </distributionManagement>
 </project>

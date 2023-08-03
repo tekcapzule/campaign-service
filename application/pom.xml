@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.tekcapsule</groupId>
-    <artifactId>marketing-service</artifactId>
+    <artifactId>campaign-service</artifactId>
     <version>1.0.0</version>
-    <name>Marketing Service</name>
-    <description>Marketing Service</description>
+    <name>Campaign Service</name>
+    <description>Campaign Service</description>
     <properties>
         <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -53,7 +53,7 @@
         </dependency>
         <dependency>
             <groupId>com.tekcapsule</groupId>
-            <artifactId>marketing-domain</artifactId>
+            <artifactId>campaign-domain</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
@@ -115,9 +115,9 @@
     </build>
     <distributionManagement>
         <repository>
-            <id>marketing</id>
+            <id>campaign</id>
             <name>GitHub TekCapsule Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/tekcapsule/marketing-service</url>
+            <url>https://maven.pkg.github.com/tekcapsule/campaign-service</url>
         </repository>
     </distributionManagement>
 </project>

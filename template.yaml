@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::Serverless-2016-10-31
-Description: Marketing-Service-Deployment-Descriptor
+Description: Campaign-Service-Deployment-Descriptor
 
 Parameters:
   Stage:
@@ -20,21 +20,21 @@ Globals:
     CodeUri: ./application
     Tags:
       Stage: !Ref Stage
-      Service: Marketing
+      Service: Campaign
       Resource: Lambda
     Environment:
       Variables:
-        TABLE: !Ref MarketingTable
+        TABLE: !Ref CampaignTable
         APPLICATION_ENVIRONMENT: !Ref Stage
         CLOUD_REGION: us-east-1
-        MAIN_CLASS: com.tekcapsule.marketing.application.MarketingApplication
+        MAIN_CLASS: com.tekcapsule.campaign.application.CampaignApplication
         JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
 
 Resources:
 
   # Setup API Gateway
 
-  CourseApi:
+  CampaignApi:
     Type: AWS::Serverless::Api
     Properties:
       Name: !Sub "marketing-${Stage}"
@@ -50,61 +50,32 @@ Resources:
 
   # Setup DynamoDB Table
 
-  CourseTable:
+  CampaignTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: !Sub "${Stage}Course"
+      TableName: !Sub "${Stage}Campaign"
       AttributeDefinitions:
-        - AttributeName: courseId
-          AttributeType: S
-        - AttributeName: topicCode
+        - AttributeName: campaignId
           AttributeType: S
         - AttributeName: status
           AttributeType: S
-        - AttributeName: recommendations
-          AttributeType: N
       KeySchema:
-        - AttributeName: courseId
+        - AttributeName: campaignId
           KeyType: HASH
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
-      GlobalSecondaryIndexes:
-        - IndexName: topicGSI
-          KeySchema:
-            - AttributeName: status
-              KeyType: HASH
-            - AttributeName: topicCode
-              KeyType: RANGE
-          Projection:
-            ProjectionType: ALL
-          ProvisionedThroughput:
-            ReadCapacityUnits: 1
-            WriteCapacityUnits: 1
-
-        - IndexName: trendingGSI
-          KeySchema:
-            - AttributeName: status
-              KeyType: HASH
-            - AttributeName: recommendations
-              KeyType: RANGE
-          Projection:
-            ProjectionType: ALL
-          ProvisionedThroughput:
-            ReadCapacityUnits: 1
-            WriteCapacityUnits: 1
-
   # Setup Lambda Functions
 
-  CreateCourseFunction:
+  CreateCampaignFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub "${Stage}-Course-CreateCourse"
+      FunctionName: !Sub "${Stage}-Campaign-CreateCampaign"
       SnapStart:
         ApplyOn: PublishedVersions
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref CourseTable
+            TableName: !Ref CampaignTable
       Environment:
         Variables:
           SPRING_CLOUD_FUNCTION_DEFINITION: createFunction
@@ -112,20 +83,20 @@ Resources:
         ApiEvent:
           Type: Api
           Properties:
-            Path: course/create
+            Path: campaign/create
             Method: post
             RestApiId:
-              Ref: CourseApi
+              Ref: CampaignApi
 
-  UpdateCourseFunction:
+  UpdateCampaignFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub "${Stage}-Course-UpdateCourse"
+      FunctionName: !Sub "${Stage}-Campaign-UpdateCampaign"
       SnapStart:
         ApplyOn: PublishedVersions
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref CourseTable
+            TableName: !Ref CampaignTable
       Environment:
         Variables:
           SPRING_CLOUD_FUNCTION_DEFINITION: updateFunction
@@ -133,20 +104,20 @@ Resources:
         ApiEvent:
           Type: Api
           Properties:
-            Path: course/update
+            Path: campaign/update
             Method: post
             RestApiId:
-              Ref: CourseApi
+              Ref: CampaignApi
 
-  GetCourseFunction:
+  GetCampaignFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub "${Stage}-Course-GetCourse"
+      FunctionName: !Sub "${Stage}-Campaign-GetCampaign"
       SnapStart:
         ApplyOn: PublishedVersions
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref CourseTable
+            TableName: !Ref CampaignTable
       Environment:
         Variables:
           SPRING_CLOUD_FUNCTION_DEFINITION: getFunction
@@ -154,20 +125,20 @@ Resources:
         ApiEvent:
           Type: Api
           Properties:
-            Path: course/get
+            Path: campaign/get
             Method: post
             RestApiId:
-              Ref: CourseApi
+              Ref: CampaignApi
 
-  GetAllCoursesFunction:
+  GetAllCampaignsFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub "${Stage}-Course-GetAllCourses"
+      FunctionName: !Sub "${Stage}-Campaign-GetAllCampaigns"
       SnapStart:
         ApplyOn: PublishedVersions
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref CourseTable
+            TableName: !Ref CampaignTable
       Environment:
         Variables:
           SPRING_CLOUD_FUNCTION_DEFINITION: getAllFunction
@@ -175,36 +146,14 @@ Resources:
         ApiEvent:
           Type: Api
           Properties:
-            Path: course/getAll
+            Path: campaign/getAll
             Method: post
             RestApiId:
-              Ref: CourseApi
-
-  RecommendCourseFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: !Sub "${Stage}-Course-RecommendCourse"
-      SnapStart:
-        ApplyOn: PublishedVersions
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref CourseTable
-      Environment:
-        Variables:
-          SPRING_CLOUD_FUNCTION_DEFINITION: recommendFunction
-      Events:
-        ApiEvent:
-          Type: Api
-          Properties:
-            Path: course/recommend
-            Method: post
-            RestApiId:
-              Ref: CourseApi
-
+              Ref: CampaignApi
 
   # Set Output Variable
 
 Outputs:
   ApiEndpoint:
-    Description: "Course API endpoint."
-    Value: !Sub "https://${CourseApi}.execute-api.${AWS::Region}.amazonaws.com/${Stage}/course"
+    Description: "Campaign API endpoint."
+    Value: !Sub "https://${CampaignApi}.execute-api.${AWS::Region}.amazonaws.com/${Stage}/campaign"
