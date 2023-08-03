@@ -1,12 +1,12 @@
 <!-- PROJECT SHIELDS -->
 <a name="readme-top"></a>
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Main Branch](https://github.com/tekcapsule/course-service/actions/workflows/cicd.yml/badge.svg)](https://github.com/tekcapsule/course-service/actions/workflows/cicd.yml) 
+[![Main Branch](https://github.com/tekcapsule/campaign-service/actions/workflows/cicd.yml/badge.svg)](https://github.com/tekcapsule/campaign-service/actions/workflows/cicd.yml) 
 [![SonarCloud Bugs](https://sonarcloud.io/api/project_badges/measure?project=tekcapsule_course-service&metric=bugs)](https://sonarcloud.io/project/overview?id=tekcapsule_course-service)
 [![SonarCloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=tekcapsule_course-service&metric=vulnerabilities)](https://sonarcloud.io/project/overview?id=tekcapsule_course-service)
 [![SonarCloud Code Smell](https://sonarcloud.io/api/project_badges/measure?project=tekcapsule_course-service&metric=code_smells)](https://sonarcloud.io/project/overview?id=tekcapsule_course-service)
 [![SonarCloud Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=tekcapsule_course-service&metric=ncloc)](https://sonarcloud.io/project/overview?id=tekcapsule_course-service)
-[![Github all releases](https://img.shields.io/github/downloads/tekcapsule/course-service/total.svg)](https://GitHub.com/tekcapsule/course-service/releases/)
+[![Github all releases](https://img.shields.io/github/downloads/tekcapsule/campaign-service/total.svg)](https://GitHub.com/tekcapsule/campaign-service/releases/)
 
 
 <!-- PROJECT LOGO -->
@@ -15,11 +15,11 @@
   <img src="https://user-images.githubusercontent.com/9839481/209770761-99fd940f-3c75-407b-a339-9fd2cd2c5b7f.svg">
   <h3 align="center">Course Service</h3>
   <p align="center">
-    A set of lambda functions to manage courses in TekCapsule
+    A set of lambda functions to manage cours in TekCapsule
     <br />
     <a href="https://www.tekcapsule.com/">View Demo</a> |
-    <a href="https://github.com/tekcapsule/course-service/issues">Report Bug</a> |
-    <a href="https://github.com/tekcapsule/course-service/issues">Request Feature</a>
+    <a href="https://github.com/tekcapsule/campaign-service/issues">Report Bug</a> |
+    <a href="https://github.com/tekcapsule/campaign-service/issues">Request Feature</a>
   </p>
 </div>
 <div align="center">
@@ -55,9 +55,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project contains set of functions written in Java 11 to create, update, query and manage TekCapsule courses. It is a multi-module maven project with two modules named application & domain. Application module is a springboot application that exposes these functions and domain module contains the domain logic.
+This project contains set of functions written in Java 11 to create, update, query and manage TekCapsule cours. It is a multi-module maven project with two modules named application & domain. Application module is a springboot application that exposes these functions and domain module contains the domain logic.
 
-![course-service](https://user-images.githubusercontent.com/9839481/209629447-76ae3d14-752a-4b6f-b00c-85028fdb2095.png)
+![campaign-service](https://user-images.githubusercontent.com/9839481/209629447-76ae3d14-752a-4b6f-b00c-85028fdb2095.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -89,7 +89,7 @@ Please follow the step by step instructions to install the required softwares an
 1. Get the AWS Access Key details
 2. Clone the repo
    ```sh
-   git clone https://github.com/tekcapsule/course-service.git
+   git clone https://github.com/tekcapsule/campaign-service.git
    ```
 3. Install SAM CLI by following instructions https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html
 4. Configure the following Environment variables
@@ -115,7 +115,7 @@ Note: SERVER_USERNAME and SERVER_PASSWORD details will be be provided by the mai
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/tekcapsule/course-service/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/tekcapsule/campaign-service/issues) for a list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -134,7 +134,7 @@ Don't forget to give the project a star! Thanks again!
 5. Open a Pull Request
 
 ## Contributors
-<img src= "https://contrib.rocks/image?repo=tekcapsule/course-service">
+<img src= "https://contrib.rocks/image?repo=tekcapsule/campaign-service">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

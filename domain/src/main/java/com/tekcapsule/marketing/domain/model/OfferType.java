@@ -4,11 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
-public enum PrizingModel {
-    FREE("Free"),
-    PAID("Paid"),
-    FREEMIUM("Freemium");
-
+public enum OfferType {
+    NEW_USER("New User"),
+    ANY_USER("Any User");
     @Getter
     private String value;
 }

@@ -9,7 +9,7 @@ import com.tekcapsule.marketing.application.config.AppConfig;
 import com.tekcapsule.marketing.application.function.input.UpdateInput;
 import com.tekcapsule.marketing.application.mapper.InputOutputMapper;
 import com.tekcapsule.marketing.domain.command.UpdateCommand;
-import com.tekcapsule.marketing.domain.service.CourseService;
+import com.tekcapsule.marketing.domain.service.CampaignService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
@@ -23,12 +23,12 @@ import java.util.function.Function;
 @Slf4j
 public class UpdateFunction implements Function<Message<UpdateInput>, Message<Void>> {
 
-    private final CourseService courseService;
+    private final CampaignService campaignService;
 
     private final AppConfig appConfig;
 
-    public UpdateFunction(final CourseService courseService, final AppConfig appConfig) {
-        this.courseService = courseService;
+    public UpdateFunction(final CampaignService campaignService, final AppConfig appConfig) {
+        this.campaignService = campaignService;
         this.appConfig = appConfig;
     }
 
@@ -44,7 +44,7 @@ public class UpdateFunction implements Function<Message<UpdateInput>, Message<Vo
             log.info(String.format("Entering update course Function - Module Code:%s", updateInput.getTopicCode()));
             Origin origin = HeaderUtil.buildOriginFromHeaders(updateInputMessage.getHeaders());
             UpdateCommand updateCommand = InputOutputMapper.buildUpdateCommandFromUpdateInput.apply(updateInput, origin);
-            courseService.update(updateCommand);
+            campaignService.update(updateCommand);
             responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.SUCCESS);
             payload = PayloadUtil.composePayload(Outcome.SUCCESS);
         } catch (Exception ex) {

@@ -4,7 +4,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
-import com.tekcapsule.marketing.domain.model.Course;
+import com.tekcapsule.marketing.domain.model.Campaign;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,24 +14,24 @@ import java.util.List;
 
 @Slf4j
 @Repository
-public class CourseRepositoryImpl implements CourseDynamoRepository {
+public class CampaignRepositoryImpl implements CampaignDynamoRepository {
 
     private DynamoDBMapper dynamo;
     public static final String ACTIVE_STATUS = "ACTIVE";
 
     @Autowired
-    public CourseRepositoryImpl(DynamoDBMapper dynamo) {
+    public CampaignRepositoryImpl(DynamoDBMapper dynamo) {
         this.dynamo = dynamo;
     }
 
     @Override
-    public List<Course> findAll() {
+    public List<Campaign> findAll() {
 
-        return dynamo.scan(Course.class,new DynamoDBScanExpression());
+        return dynamo.scan(Campaign.class,new DynamoDBScanExpression());
     }
 
     @Override
-    public List<Course> findAllByTopicCode(String topicCode) {
+    public List<Campaign> findAllByTopicCode(String topicCode) {
 
         HashMap<String, AttributeValue> expAttributes = new HashMap<>();
         expAttributes.put(":status", new AttributeValue().withS(ACTIVE_STATUS));
@@ -42,24 +42,24 @@ public class CourseRepositoryImpl implements CourseDynamoRepository {
         expNames.put("#topicCode", "topicCode");
 
 
-        DynamoDBQueryExpression<Course> queryExpression = new DynamoDBQueryExpression<Course>()
+        DynamoDBQueryExpression<Campaign> queryExpression = new DynamoDBQueryExpression<Campaign>()
                 .withIndexName("topicGSI").withConsistentRead(false)
                 .withKeyConditionExpression("#status = :status and #topicCode = :topicCode")
                 .withExpressionAttributeValues(expAttributes)
                 .withExpressionAttributeNames(expNames);
 
-        return dynamo.query(Course.class, queryExpression);
+        return dynamo.query(Campaign.class, queryExpression);
 
     }
 
     @Override
-    public Course findBy(String code) {
-        return dynamo.load(Course.class, code);
+    public Campaign findBy(String code) {
+        return dynamo.load(Campaign.class, code);
     }
 
     @Override
-    public Course save(Course course) {
-        dynamo.save(course);
-        return course;
+    public Campaign save(Campaign campaign) {
+        dynamo.save(campaign);
+        return campaign;
     }
 }
