@@ -1,0 +1,24 @@
+version = 0.1
+[dev]
+[dev.deploy]
+[dev.deploy.parameters]
+stack_name = "dev-course-service"
+s3_bucket = "com.tekcapsule.api.deployment.dev"
+s3_prefix = "dev-course-service"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "Stage=\"dev\""
+image_repositories = []
+
+[prod]
+[prod.deploy]
+[prod.deploy.parameters]
+stack_name = "prod-course-service"
+s3_bucket = "com.tekcapsule.api.deployment.prod"
+s3_prefix = "prod-course-service"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "Stage=\"prod\" Environment=\"prod\""
+image_repositories = []
