@@ -41,12 +41,4 @@ public final class InputOutputMapper {
         addOrigin.apply(updateCommand, origin);
         return updateCommand;
     };
-
-    public static final BiFunction<RecommendInput, Origin, RecommendCommand> buildRecommendCommandFromRecommendInput = (recommendInput, origin) -> {
-        RecommendCommand recommendCommand =  RecommendCommand.builder().build();
-        BeanUtils.copyProperties(recommendInput, recommendCommand);
-        addOrigin.apply(recommendCommand, origin);
-        return recommendCommand;
-    };
-
 }

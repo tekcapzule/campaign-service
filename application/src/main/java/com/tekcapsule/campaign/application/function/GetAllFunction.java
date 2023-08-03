@@ -36,7 +36,7 @@ public class GetAllFunction implements Function<Message<EmptyFunctionInput>, Mes
         List<Campaign> cours = new ArrayList<>();
         String stage = appConfig.getStage().toUpperCase();
         try {
-            log.info("Entering get all cours Function");
+            log.info("Entering get all campaign Function");
             cours = campaignService.findAll();
             responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.SUCCESS);
         } catch (Exception ex) {

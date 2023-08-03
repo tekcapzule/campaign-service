@@ -20,7 +20,7 @@ import java.util.function.Function;
 
 @Component
 @Slf4j
-public class GetFunction implements Function<Message<GetInput>, Message<List<Campaign>>> {
+public class GetFunction implements Function<Message<GetInput>, Message<Campaign>> {
 
     private final CampaignService campaignService;
 
@@ -33,18 +33,18 @@ public class GetFunction implements Function<Message<GetInput>, Message<List<Cam
 
 
     @Override
-    public Message<List<Campaign>> apply(Message<GetInput> getInputMessage) {
+    public Message<Campaign> apply(Message<GetInput> getInputMessage) {
 
         Map<String, Object> responseHeaders = new HashMap<>();
-        List<Campaign> cours = new ArrayList<>();
+        Campaign campaign = new Campaign();
 
         String stage = appConfig.getStage().toUpperCase();
 
         try {
             GetInput getInput = getInputMessage.getPayload();
-            log.info(String.format("Entering get course Function -Module Code:%s", getInput.getTopicCode()));
-            cours = campaignService.findAllByTopicCode(getInput.getTopicCode());
-            if (cours.isEmpty()) {
+            log.info(String.format("Entering get campaign Function -Module Code:%s", getInput.getCampaignId()));
+            campaign = campaignService.findById(getInput.getCampaignId());
+            if (campaign==null) {
                 responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.NOT_FOUND);
             } else {
                 responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.SUCCESS);
@@ -53,6 +53,6 @@ public class GetFunction implements Function<Message<GetInput>, Message<List<Cam
             log.error(ex.getMessage());
             responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.ERROR);
         }
-        return new GenericMessage<>(cours, responseHeaders);
+        return new GenericMessage<>(campaign, responseHeaders);
     }
 }

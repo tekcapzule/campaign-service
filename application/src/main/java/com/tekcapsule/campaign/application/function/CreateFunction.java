@@ -41,7 +41,7 @@ public class CreateFunction implements Function<Message<CreateInput>, Message<Vo
 
         try {
             CreateInput createInput = createInputMessage.getPayload();
-            log.info(String.format("Entering create course Function - Module Code:%s", createInput.getTopicCode()));
+            log.info(String.format("Entering create campaign Function - Campaign Title:%s", createInput.getTitle()));
             Origin origin = HeaderUtil.buildOriginFromHeaders(createInputMessage.getHeaders());
             CreateCommand createCommand = InputOutputMapper.buildCreateCommandFromCreateInput.apply(createInput, origin);
             campaignService.create(createCommand);
