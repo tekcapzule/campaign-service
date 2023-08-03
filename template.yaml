@@ -37,7 +37,7 @@ Resources:
   CampaignApi:
     Type: AWS::Serverless::Api
     Properties:
-      Name: !Sub "marketing-${Stage}"
+      Name: !Sub "campaign-${Stage}"
       StageName: !Ref Stage
       Cors:
         AllowMethods: "'POST, GET'"
