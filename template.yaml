@@ -57,8 +57,6 @@ Resources:
       AttributeDefinitions:
         - AttributeName: campaignId
           AttributeType: S
-        - AttributeName: status
-          AttributeType: S
       KeySchema:
         - AttributeName: campaignId
           KeyType: HASH
