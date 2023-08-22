@@ -4,7 +4,7 @@ import com.tekcapsule.core.utils.HeaderUtil;
 import com.tekcapsule.core.utils.Outcome;
 import com.tekcapsule.core.utils.Stage;
 import com.tekcapsule.campaign.application.config.AppConfig;
-import com.tekcapsule.campaign.application.function.input.GetInput;
+import com.tekcapsule.campaign.application.function.input.GetCampaignInput;
 import com.tekcapsule.campaign.domain.model.Campaign;
 import com.tekcapsule.campaign.domain.service.CampaignService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,28 +12,26 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
 @Component
 @Slf4j
-public class GetFunction implements Function<Message<GetInput>, Message<Campaign>> {
+public class GetCampaignFunction implements Function<Message<GetCampaignInput>, Message<Campaign>> {
 
     private final CampaignService campaignService;
 
     private final AppConfig appConfig;
 
-    public GetFunction(final CampaignService campaignService, final AppConfig appConfig) {
+    public GetCampaignFunction(final CampaignService campaignService, final AppConfig appConfig) {
         this.campaignService = campaignService;
         this.appConfig = appConfig;
     }
 
 
     @Override
-    public Message<Campaign> apply(Message<GetInput> getInputMessage) {
+    public Message<Campaign> apply(Message<GetCampaignInput> getInputMessage) {
 
         Map<String, Object> responseHeaders = new HashMap<>();
         Campaign campaign = new Campaign();
@@ -41,8 +39,8 @@ public class GetFunction implements Function<Message<GetInput>, Message<Campaign
         String stage = appConfig.getStage().toUpperCase();
 
         try {
-            GetInput getInput = getInputMessage.getPayload();
-            log.info(String.format("Entering get campaign Function -Module Code:%s", getInput.getCampaignId()));
+            GetCampaignInput getInput = getInputMessage.getPayload();
+            log.info(String.format("Entering get campaign Function -Campaign Id:%s", getInput.getCampaignId()));
             campaign = campaignService.findById(getInput.getCampaignId());
             if (campaign==null) {
                 responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.NOT_FOUND);

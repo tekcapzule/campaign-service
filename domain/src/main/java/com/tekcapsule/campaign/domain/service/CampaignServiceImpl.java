@@ -1,8 +1,8 @@
 package com.tekcapsule.campaign.domain.service;
 
-import com.tekcapsule.campaign.domain.repository.CampaignDynamoRepository;
-import com.tekcapsule.campaign.domain.command.CreateCommand;
-import com.tekcapsule.campaign.domain.command.UpdateCommand;
+import com.tekcapsule.campaign.domain.repository.CampaignRepository;
+import com.tekcapsule.campaign.domain.command.CreateCampaignCommand;
+import com.tekcapsule.campaign.domain.command.UpdateCampaignCommand;
 import com.tekcapsule.campaign.domain.model.Campaign;
 import com.tekcapsule.campaign.domain.model.Status;
 import lombok.extern.slf4j.Slf4j;
@@ -13,15 +13,15 @@ import java.util.List;
 @Slf4j
 @Service
 public class CampaignServiceImpl implements CampaignService {
-    private CampaignDynamoRepository campaignDynamoRepository;
+    private CampaignRepository campaignRepository;
 
     @Autowired
-    public CampaignServiceImpl(CampaignDynamoRepository campaignDynamoRepository) {
-        this.campaignDynamoRepository = campaignDynamoRepository;
+    public CampaignServiceImpl(CampaignRepository campaignDynamoRepository) {
+        this.campaignRepository = campaignDynamoRepository;
     }
 
     @Override
-    public void create(CreateCommand createCommand) {
+    public void create(CreateCampaignCommand createCommand) {
 
         log.info(String.format("Entering create campaign service - Title :%s", createCommand.getTitle()));
 
@@ -41,15 +41,15 @@ public class CampaignServiceImpl implements CampaignService {
         campaign.setAddedOn(createCommand.getExecOn());
         campaign.setAddedBy(createCommand.getExecBy().getUserId());
 
-        campaignDynamoRepository.save(campaign);
+        campaignRepository.save(campaign);
     }
 
     @Override
-    public void update(UpdateCommand updateCommand) {
+    public void update(UpdateCampaignCommand updateCommand) {
 
         log.info(String.format("Entering update campaign service - Campaign ID:%s", updateCommand.getCampaignId()));
 
-        Campaign campaign = campaignDynamoRepository.findBy(updateCommand.getCampaignId());
+        Campaign campaign = campaignRepository.findBy(updateCommand.getCampaignId());
         if (campaign != null) {
             campaign.setTitle(updateCommand.getTitle());
             campaign.setSubTitle(updateCommand.getSubTitle());
@@ -61,7 +61,7 @@ public class CampaignServiceImpl implements CampaignService {
             campaign.setResourceUrl(updateCommand.getResourceUrl());
             campaign.setUpdatedOn(updateCommand.getExecOn());
             campaign.setUpdatedBy(updateCommand.getExecBy().getUserId());
-            campaignDynamoRepository.save(campaign);
+            campaignRepository.save(campaign);
         }
     }
 
@@ -69,7 +69,7 @@ public class CampaignServiceImpl implements CampaignService {
     public List<Campaign> findAll() {
 
         log.info("Entering findAll Campaign service");
-        return campaignDynamoRepository.findAll();
+        return campaignRepository.findAll();
     }
 
     @Override
@@ -77,7 +77,7 @@ public class CampaignServiceImpl implements CampaignService {
 
         log.info(String.format("Entering findById Campaign service - CampaignId :%s", campaignId));
 
-        return campaignDynamoRepository.findBy(campaignId);
+        return campaignRepository.findBy(campaignId);
     }
 
 }

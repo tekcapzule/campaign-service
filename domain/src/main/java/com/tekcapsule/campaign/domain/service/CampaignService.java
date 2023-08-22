@@ -1,7 +1,7 @@
 package com.tekcapsule.campaign.domain.service;
 
-import com.tekcapsule.campaign.domain.command.CreateCommand;
-import com.tekcapsule.campaign.domain.command.UpdateCommand;
+import com.tekcapsule.campaign.domain.command.CreateCampaignCommand;
+import com.tekcapsule.campaign.domain.command.UpdateCampaignCommand;
 import com.tekcapsule.campaign.domain.model.Campaign;
 
 import java.util.List;
@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface CampaignService {
 
-    void create(CreateCommand createCommand);
-    void update(UpdateCommand updateCommand);
+    void create(CreateCampaignCommand createCommand);
+    void update(UpdateCampaignCommand updateCommand);
     List<Campaign> findAll();
     Campaign findById(String campaignId);
 }
