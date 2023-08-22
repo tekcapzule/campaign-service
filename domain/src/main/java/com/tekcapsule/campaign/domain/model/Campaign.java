@@ -6,6 +6,8 @@ import com.tekcapsule.core.domain.AggregateRoot;
 import com.tekcapsule.core.domain.BaseDomainEntity;
 import lombok.*;
 
+import java.util.List;
+
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -24,6 +26,8 @@ public class Campaign extends BaseDomainEntity implements AggregateRoot {
     private String subTitle;
     @DynamoDBAttribute(attributeName = "description")
     private String description;
+    @DynamoDBAttribute(attributeName = "highlights")
+    private List<Highlight> highlights;
     @DynamoDBAttribute(attributeName = "startsOn")
     private String startsOn;
     @DynamoDBAttribute(attributeName = "endsOn")

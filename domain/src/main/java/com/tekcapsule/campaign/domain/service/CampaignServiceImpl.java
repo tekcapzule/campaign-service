@@ -29,6 +29,7 @@ public class CampaignServiceImpl implements CampaignService {
                 .title(createCommand.getTitle())
                 .subTitle(createCommand.getSubTitle())
                 .description(createCommand.getDescription())
+                .highlights(createCommand.getHighlights())
                 .offer(createCommand.getOffer())
                 .startsOn(createCommand.getStartsOn())
                 .endsOn(createCommand.getEndsOn())
@@ -53,6 +54,7 @@ public class CampaignServiceImpl implements CampaignService {
             campaign.setTitle(updateCommand.getTitle());
             campaign.setSubTitle(updateCommand.getSubTitle());
             campaign.setDescription(updateCommand.getDescription());
+            campaign.setHighlights(updateCommand.getHighlights());
             campaign.setStartsOn(updateCommand.getStartsOn());
             campaign.setEndsOn(updateCommand.getEndsOn());
             campaign.setOffer(updateCommand.getOffer());
