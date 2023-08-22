@@ -17,13 +17,13 @@ import java.util.function.Function;
 
 @Component
 @Slf4j
-public class GetAllFunction implements Function<Message<EmptyFunctionInput>, Message<List<Campaign>>> {
+public class GetAllCampaignFunction implements Function<Message<EmptyFunctionInput>, Message<List<Campaign>>> {
 
     private final CampaignService campaignService;
 
     private final AppConfig appConfig;
 
-    public GetAllFunction(final CampaignService campaignService, final AppConfig appConfig) {
+    public GetAllCampaignFunction(final CampaignService campaignService, final AppConfig appConfig) {
         this.campaignService = campaignService;
         this.appConfig = appConfig;
     }
@@ -33,16 +33,16 @@ public class GetAllFunction implements Function<Message<EmptyFunctionInput>, Mes
     public Message<List<Campaign>> apply(Message<EmptyFunctionInput> getAllInputMessage) {
 
         Map<String, Object> responseHeaders = new HashMap<>();
-        List<Campaign> cours = new ArrayList<>();
+        List<Campaign> campaigns = new ArrayList<>();
         String stage = appConfig.getStage().toUpperCase();
         try {
             log.info("Entering get all campaign Function");
-            cours = campaignService.findAll();
+            campaigns = campaignService.findAll();
             responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.SUCCESS);
         } catch (Exception ex) {
             log.error(ex.getMessage());
             responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.ERROR);
         }
-        return new GenericMessage<>(cours, responseHeaders);
+        return new GenericMessage<>(campaigns, responseHeaders);
     }
 }

@@ -76,12 +76,12 @@ Resources:
             TableName: !Ref CampaignTable
       Environment:
         Variables:
-          SPRING_CLOUD_FUNCTION_DEFINITION: createFunction
+          SPRING_CLOUD_FUNCTION_DEFINITION: createCampaignFunction
       Events:
         ApiEvent:
           Type: Api
           Properties:
-            Path: campaign/create
+            Path: campaign/createCampaign
             Method: post
             RestApiId:
               Ref: CampaignApi
@@ -97,12 +97,12 @@ Resources:
             TableName: !Ref CampaignTable
       Environment:
         Variables:
-          SPRING_CLOUD_FUNCTION_DEFINITION: updateFunction
+          SPRING_CLOUD_FUNCTION_DEFINITION: updateCampaignFunction
       Events:
         ApiEvent:
           Type: Api
           Properties:
-            Path: campaign/update
+            Path: campaign/updateCampaign
             Method: post
             RestApiId:
               Ref: CampaignApi
@@ -118,12 +118,12 @@ Resources:
             TableName: !Ref CampaignTable
       Environment:
         Variables:
-          SPRING_CLOUD_FUNCTION_DEFINITION: getFunction
+          SPRING_CLOUD_FUNCTION_DEFINITION: getCampaignFunction
       Events:
         ApiEvent:
           Type: Api
           Properties:
-            Path: campaign/get
+            Path: campaign/getCampaign
             Method: post
             RestApiId:
               Ref: CampaignApi
@@ -139,12 +139,54 @@ Resources:
             TableName: !Ref CampaignTable
       Environment:
         Variables:
-          SPRING_CLOUD_FUNCTION_DEFINITION: getAllFunction
+          SPRING_CLOUD_FUNCTION_DEFINITION: getAllCampaignFunction
       Events:
         ApiEvent:
           Type: Api
           Properties:
-            Path: campaign/getAll
+            Path: campaign/getAllCampaign
+            Method: post
+            RestApiId:
+              Ref: CampaignApi
+
+  CreateLeadFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "${Stage}-Campaign-CreateLead"
+      SnapStart:
+        ApplyOn: PublishedVersions
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref CampaignTable
+      Environment:
+        Variables:
+          SPRING_CLOUD_FUNCTION_DEFINITION: createLeadFunction
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: campaign/createLead
+            Method: post
+            RestApiId:
+              Ref: CampaignApi
+
+  GetAllLeadsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "${Stage}-Campaign-GetAllLeads"
+      SnapStart:
+        ApplyOn: PublishedVersions
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref CampaignTable
+      Environment:
+        Variables:
+          SPRING_CLOUD_FUNCTION_DEFINITION: getAllLeadsFunction
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: campaign/getAllLeads
             Method: post
             RestApiId:
               Ref: CampaignApi

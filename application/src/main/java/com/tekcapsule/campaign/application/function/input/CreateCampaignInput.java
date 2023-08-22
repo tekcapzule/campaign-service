@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
-public class CreateInput {
+public class CreateCampaignInput {
     private String title;
     private String subTitle;
     private String description;

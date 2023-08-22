@@ -1,17 +1,17 @@
-package com.tekcapsule.campaign.domain.command;
+package com.tekcapsule.campaign.application.function.input;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tekcapsule.campaign.domain.model.Highlight;
-import com.tekcapsule.core.domain.Command;
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Builder
-public class CreateCommand extends Command {
+@NoArgsConstructor
+public class UpdateCampaignInput {
+    private String campaignId;
     private String title;
     private String subTitle;
     private String description;
@@ -21,4 +21,5 @@ public class CreateCommand extends Command {
     private String offer;
     private String resourceUrl;
     private String imageUrl;
+
 }

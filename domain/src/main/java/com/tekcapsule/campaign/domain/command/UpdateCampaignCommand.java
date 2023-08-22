@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Builder
-public class UpdateCommand extends Command {
+public class UpdateCampaignCommand extends Command {
     private String campaignId;
     private String title;
     private String subTitle;

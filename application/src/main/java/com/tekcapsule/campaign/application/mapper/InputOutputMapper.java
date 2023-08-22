@@ -1,12 +1,14 @@
 package com.tekcapsule.campaign.application.mapper;
 
+import com.tekcapsule.campaign.application.function.input.CreateLeadInput;
+import com.tekcapsule.campaign.domain.command.CreateLeadCommand;
 import com.tekcapsule.core.domain.Command;
 import com.tekcapsule.core.domain.ExecBy;
 import com.tekcapsule.core.domain.Origin;
-import com.tekcapsule.campaign.application.function.input.CreateInput;
-import com.tekcapsule.campaign.application.function.input.UpdateInput;
-import com.tekcapsule.campaign.domain.command.CreateCommand;
-import com.tekcapsule.campaign.domain.command.UpdateCommand;
+import com.tekcapsule.campaign.application.function.input.CreateCampaignInput;
+import com.tekcapsule.campaign.application.function.input.UpdateCampaignInput;
+import com.tekcapsule.campaign.domain.command.CreateCampaignCommand;
+import com.tekcapsule.campaign.domain.command.UpdateCampaignCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 
@@ -28,17 +30,23 @@ public final class InputOutputMapper {
         return command;
     };
 
-    public static final BiFunction<CreateInput, Origin, CreateCommand> buildCreateCommandFromCreateInput = (createInput, origin) -> {
-        CreateCommand createCommand =  CreateCommand.builder().build();
+    public static final BiFunction<CreateCampaignInput, Origin, CreateCampaignCommand> buildCreateCampaignCommandFromCreateCampaignInput = (createInput, origin) -> {
+        CreateCampaignCommand createCommand =  CreateCampaignCommand.builder().build();
         BeanUtils.copyProperties(createInput, createCommand);
         addOrigin.apply(createCommand, origin);
         return createCommand;
     };
 
-    public static final BiFunction<UpdateInput, Origin, UpdateCommand> buildUpdateCommandFromUpdateInput = (updateInput, origin) -> {
-        UpdateCommand updateCommand = UpdateCommand.builder().build();
+    public static final BiFunction<UpdateCampaignInput, Origin, UpdateCampaignCommand> buildUpdateCampaignCommandFromUpdateCampaignInput = (updateInput, origin) -> {
+        UpdateCampaignCommand updateCommand = UpdateCampaignCommand.builder().build();
         BeanUtils.copyProperties(updateInput, updateCommand);
         addOrigin.apply(updateCommand, origin);
         return updateCommand;
+    };
+    public static final BiFunction<CreateLeadInput, Origin, CreateLeadCommand> buildCreateLeadCommandFromCreateLeadInput = (createInput, origin) -> {
+        CreateLeadCommand createLeadCommand =  CreateLeadCommand.builder().build();
+        BeanUtils.copyProperties(createInput, createLeadCommand);
+        addOrigin.apply(createLeadCommand, origin);
+        return createLeadCommand;
     };
 }
