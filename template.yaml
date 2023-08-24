@@ -57,9 +57,13 @@ Resources:
       AttributeDefinitions:
         - AttributeName: campaignId
           AttributeType: S
+        - AttributeName: status
+          AttributeType: S
       KeySchema:
         - AttributeName: campaignId
           KeyType: HASH
+        - AttributeName: status
+          KeyType: RANGE
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
