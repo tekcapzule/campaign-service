@@ -61,6 +61,8 @@ Resources:
           AttributeType: S
         - AttributeName: startsOn
           AttributeType: S
+        - AttributeName: firstName
+          AttributeType: S
       KeySchema:
         - AttributeName: campaignId
           KeyType: HASH
