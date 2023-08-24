@@ -1,8 +1,12 @@
 package com.tekcapsule.campaign.domain.repository;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
+
 import com.tekcapsule.campaign.domain.model.Campaign;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +29,7 @@ public class CampaignDynamoRepository implements CampaignRepository {
 
     @Override
     public List<Campaign> findAll() {
+
         HashMap<String, AttributeValue> expAttributes = new HashMap<>();
         expAttributes.put(":status", new AttributeValue().withS(ACTIVE_STATUS));
 
@@ -44,7 +49,8 @@ public class CampaignDynamoRepository implements CampaignRepository {
     public Campaign findBy(String id) {
         return dynamo.load(Campaign.class, id);
     }
-
+  
+  
     @Override
     public Campaign save(Campaign campaign) {
         dynamo.save(campaign);
