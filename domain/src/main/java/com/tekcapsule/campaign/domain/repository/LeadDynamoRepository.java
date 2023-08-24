@@ -42,7 +42,6 @@ public class LeadDynamoRepository implements LeadRepository{
         expNames.put("#status", "status");
 
         DynamoDBQueryExpression<Lead> queryExpression = new DynamoDBQueryExpression<Lead>()
-                .withIndexName("leadGSI")
                 .withConsistentRead(false)
                 .withKeyConditionExpression("#status = :status")
                 .withExpressionAttributeValues(expAttributes)
