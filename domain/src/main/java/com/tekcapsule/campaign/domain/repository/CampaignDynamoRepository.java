@@ -1,12 +1,18 @@
 package com.tekcapsule.campaign.domain.repository;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
+
 import com.tekcapsule.campaign.domain.model.Campaign;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
@@ -24,13 +30,27 @@ public class CampaignDynamoRepository implements CampaignRepository {
     @Override
     public List<Campaign> findAll() {
 
-        return dynamo.scan(Campaign.class,new DynamoDBScanExpression());
-    }
-    @Override
-    public Campaign findBy(String code) {
-        return dynamo.load(Campaign.class, code);
+        HashMap<String, AttributeValue> expAttributes = new HashMap<>();
+        expAttributes.put(":status", new AttributeValue().withS(ACTIVE_STATUS));
+
+        HashMap<String, String> expNames = new HashMap<>();
+        expNames.put("#status", "status");
+
+        DynamoDBQueryExpression<Campaign> queryExpression = new DynamoDBQueryExpression<Campaign>()
+                .withConsistentRead(false)
+                .withKeyConditionExpression("#status = :status")
+                .withExpressionAttributeValues(expAttributes)
+                .withExpressionAttributeNames(expNames);
+
+        return dynamo.query(Campaign.class, queryExpression);
     }
 
+    @Override
+    public Campaign findBy(String id) {
+        return dynamo.load(Campaign.class, id);
+    }
+  
+  
     @Override
     public Campaign save(Campaign campaign) {
         dynamo.save(campaign);
