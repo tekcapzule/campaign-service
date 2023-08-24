@@ -28,8 +28,8 @@ public class LeadDynamoRepository implements LeadRepository{
     }
 
     @Override
-    public Lead findBy(String id) {
-        return dynamo.load(Lead.class, id);
+    public Lead findBy(String campaignId) {
+        return dynamo.load(Lead.class, campaignId);
     }
 
     @Override
@@ -42,6 +42,7 @@ public class LeadDynamoRepository implements LeadRepository{
         expNames.put("#status", "status");
 
         DynamoDBQueryExpression<Lead> queryExpression = new DynamoDBQueryExpression<Lead>()
+                .withIndexName("leadGSI")
                 .withConsistentRead(false)
                 .withKeyConditionExpression("#status = :status")
                 .withExpressionAttributeValues(expAttributes)

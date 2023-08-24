@@ -59,6 +59,7 @@ public class CampaignServiceImpl implements CampaignService {
             campaign.setEndsOn(updateCommand.getEndsOn());
             campaign.setOffer(updateCommand.getOffer());
             campaign.setResourceUrl(updateCommand.getResourceUrl());
+            campaign.setImageUrl(updateCommand.getImageUrl());
             campaign.setUpdatedOn(updateCommand.getExecOn());
             campaign.setUpdatedBy(updateCommand.getExecBy().getUserId());
             campaignRepository.save(campaign);

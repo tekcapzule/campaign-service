@@ -67,6 +67,32 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
+
+      GlobalSecondaryIndexes:
+        - IndexName: campaignGSI
+          KeySchema:
+            - AttributeName: status
+              KeyType: HASH
+            - AttributeName: startsOn
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
+
+        - IndexName: leadGSI
+          KeySchema:
+            - AttributeName: status
+              KeyType: HASH
+            - AttributeName: firstName
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
+
   # Setup Lambda Functions
 
   CreateCampaignFunction:

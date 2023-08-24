@@ -37,6 +37,7 @@ public class CampaignDynamoRepository implements CampaignRepository {
         expNames.put("#status", "status");
 
         DynamoDBQueryExpression<Campaign> queryExpression = new DynamoDBQueryExpression<Campaign>()
+                .withIndexName("campaignGSI")
                 .withConsistentRead(false)
                 .withKeyConditionExpression("#status = :status")
                 .withExpressionAttributeValues(expAttributes)
@@ -46,8 +47,8 @@ public class CampaignDynamoRepository implements CampaignRepository {
     }
 
     @Override
-    public Campaign findBy(String id) {
-        return dynamo.load(Campaign.class, id);
+    public Campaign findBy(String campaignId) {
+        return dynamo.load(Campaign.class, campaignId);
     }
   
   
