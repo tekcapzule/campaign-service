@@ -27,7 +27,7 @@ Globals:
         TABLE: !Ref CampaignTable
         APPLICATION_ENVIRONMENT: !Ref Stage
         CLOUD_REGION: us-east-1
-        MAIN_CLASS: com.tekcapsule.campaign.application.CampaignApplication
+        MAIN_CLASS: com.tekcapzule.campaign.application.CampaignApplication
         JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
 
 Resources:
